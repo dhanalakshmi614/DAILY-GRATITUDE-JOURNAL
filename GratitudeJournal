@@ -1,0 +1,128 @@
+//DAILY GRATITUDE JOURNAL
+class JournalEntry {
+    private String date;
+    private String content;
+    private int mood;
+
+    // Constructor
+    public JournalEntry(String date, String content, int mood) {
+        this.date = date;
+        this.content = content;
+        this.mood = mood;
+    }
+
+    // Getters and Setters
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getMood() {
+        return mood;
+    }
+
+    public void setMood(int mood) {
+        this.mood = mood;
+    }
+
+    // Display Entry
+    public void displayEntry() {
+        System.out.println("Date: " + date);
+        System.out.println("Content: " + content);
+        System.out.println("Mood: " + mood);
+    }
+}
+
+class JournalManager {
+    private ArrayList<JournalEntry> journalEntries = new ArrayList<>();
+
+    // Add Entry
+    public void addEntry(String date, String content, int mood) {
+        JournalEntry entry = new JournalEntry(date, content, mood);
+        journalEntries.add(entry);
+        System.out.println("Entry added successfully!");
+    }
+
+    // View All Entries
+    public void viewEntries() {
+        if (journalEntries.isEmpty()) {
+            System.out.println("No entries found.");
+            return;
+        }
+        for (JournalEntry entry : journalEntries) {
+            entry.displayEntry();
+            System.out.println("----------------------");
+        }
+    }
+
+    // Update Entry
+    public void updateEntry(String date, String newContent, int newMood) {
+        for (JournalEntry entry : journalEntries) {
+            if (entry.getDate().equals(date)) {
+                entry.setContent(newContent);
+                entry.setMood(newMood);
+                System.out.println("Entry updated successfully!");
+                return;
+            }
+        }
+        System.out.println("Entry not found.");
+    }
+
+    // Delete Entry
+    public void deleteEntry(String date) {
+        for (JournalEntry entry : journalEntries) {
+            if (entry.getDate().equals(date)) {
+                journalEntries.remove(entry);
+                System.out.println("Entry deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Entry not found.");
+    }
+}
+
+public class GratitudeJournal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        JournalManager manager = new JournalManager();
+
+        while (true) {
+            System.out.println("\nDaily Gratitude Journal");
+            System.out.println("1. Add Entry");
+            System.out.println("2. View All Entries");
+            System.out.println("3. Update Entry");
+            System.out.println("4. Delete Entry");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter date (YYYY-MM-DD): ");
+                    String date = scanner.nextLine();
+                    System.out.print("Enter content: ");
+                    String content = scanner.nextLine();
+                    System.out.print("Enter mood (1-5): ");
+                    int mood = scanner.nextInt();
+                    manager.addEntry(date, content, mood);
+                    break;
+
+                case 2:
+                    manager.viewEntries();
+                    break;
+
+                case 3:
+                    System.out.print("Enter the date of the entry to …I
