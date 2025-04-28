@@ -1,18 +1,18 @@
-//DAILY GRATITUDE JOURNAL
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class JournalEntry {
     private String date;
     private String content;
     private int mood;
-
-    // Constructor
-    public JournalEntry(String date, String content, int mood) {
+    public JournalEntry(String date, String content, int mood)
+{
         this.date = date;
         this.content = content;
         this.mood = mood;
     }
-
-    // Getters and Setters
-    public String getDate() {
+    public String getDate() 
+{
         return date;
     }
 
@@ -35,8 +35,6 @@ class JournalEntry {
     public void setMood(int mood) {
         this.mood = mood;
     }
-
-    // Display Entry
     public void displayEntry() {
         System.out.println("Date: " + date);
         System.out.println("Content: " + content);
@@ -46,15 +44,11 @@ class JournalEntry {
 
 class JournalManager {
     private ArrayList<JournalEntry> journalEntries = new ArrayList<>();
-
-    // Add Entry
     public void addEntry(String date, String content, int mood) {
         JournalEntry entry = new JournalEntry(date, content, mood);
         journalEntries.add(entry);
         System.out.println("Entry added successfully!");
     }
-
-    // View All Entries
     public void viewEntries() {
         if (journalEntries.isEmpty()) {
             System.out.println("No entries found.");
@@ -65,8 +59,6 @@ class JournalManager {
             System.out.println("----------------------");
         }
     }
-
-    // Update Entry
     public void updateEntry(String date, String newContent, int newMood) {
         for (JournalEntry entry : journalEntries) {
             if (entry.getDate().equals(date)) {
@@ -78,8 +70,6 @@ class JournalManager {
         }
         System.out.println("Entry not found.");
     }
-
-    // Delete Entry
     public void deleteEntry(String date) {
         for (JournalEntry entry : journalEntries) {
             if (entry.getDate().equals(date)) {
@@ -107,7 +97,7 @@ public class GratitudeJournal {
             System.out.print("Choose an option: ");
             
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
             
             switch (choice) {
                 case 1:
@@ -125,4 +115,30 @@ public class GratitudeJournal {
                     break;
 
                 case 3:
-                    System.out.print("Enter the date of the entry to …I
+                    System.out.print("Enter the date of the entry to update: ");
+                    String updateDate = scanner.nextLine();
+                    System.out.print("Enter new content: ");
+                    String newContent = scanner.nextLine();
+                    System.out.print("Enter new mood (1-5): ");
+                    int newMood = scanner.nextInt();
+                    manager.updateEntry(updateDate, newContent, newMood);
+                    break;
+
+                case 4:
+                    System.out.print("Enter the date of the entry to delete: ");
+                    String deleteDate = scanner.nextLine();
+                    manager.deleteEntry(deleteDate);
+                    break;
+
+                case 5:
+                    System.out.println("Thank you for using the Daily Gratitude Journal!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
+           
