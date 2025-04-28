@@ -82,7 +82,7 @@ class JournalManager {
     }
 }
 
-public class GratitudeJournal {
+class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         JournalManager manager = new JournalManager();
